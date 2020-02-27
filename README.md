@@ -14,7 +14,7 @@ Creating a test-namespace.
 `$ kubectl create ns test-namespace`
 
 Creating role and rolebinding for accessing kubernetes cluster.........
-Replace namespace and username with your in role-and-binding-base-user-access.yaml file !!!!
+ Replace namespace and username with your in role-and-binding-base-user-access.yaml file !!!!
 
 `$ kubectl apply -f user-base-authentication-with-ca-certificate/role-and-binding-base-user-access.yaml`
 
@@ -44,7 +44,7 @@ $ kubectl get po
 Creating service account, role and rolebinding for accessing kubernetes cluster.........
  Change the sa-name and namespace with your in service-account-base-user-access.yaml file !!!!
 
-$ kubectl apply -f user-base-authentication-with-service-account-token/service-account-base-user-access.yaml
+`$ kubectl apply -f user-base-authentication-with-service-account-token/service-account-base-user-access.yaml`
 
 Storing token name in TOKEN-NAME variable which we will use in next step.. 
 
