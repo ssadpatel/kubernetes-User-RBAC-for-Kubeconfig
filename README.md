@@ -11,7 +11,7 @@ We can authenticate users using kubectl in kubernetes with below two way!!!!
 
 Creating a test-namespace.
 
-$ kubectl create ns test-namespace
+`$ kubectl create ns test-namespace`
 
 Creating role and rolebinding for accessing kubernetes cluster.........
 Replace namespace and username with your in role-and-binding-base-user-access.yaml file !!!!
@@ -26,6 +26,7 @@ $ openssl x509 -req -in test.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kube
 ```
 Set the context for user test. Add a new user and copy the certs file to their home direcotry and run the below command. 
 
+```
 $ su - test
 
 $ kubectl config set-cluster kubernetes --server=KUBE-URL --certificate-authority=/home/test/ca.crt
@@ -34,6 +35,7 @@ $ kubectl config set-context test --cluster=kubernetes --namespace=test-namespac
 $ kubectl config use-context test
 $ kubectl get po
 
+```
 
 
 
@@ -46,20 +48,26 @@ $ kubectl apply -f user-base-authentication-with-service-account-token/service-a
 
 Storing token name in TOKEN-NAME variable which we will use in next step.. 
 
+```
 $ TOKEN-NAME=`kubectl -n test-namespace get sa service-account-name -o jsonpath='{.secrets[0].name}'`
 
+```
 stroing token in TOKEN variable after decode the token value.. 
 
+```
 $ TOKEN=`kubectl -n test-namespace get secret $TOKEN-NAME -o jsonpath='{.data.token}' | base64 -d`
 
+```
 
 Set the context for user test. Add a new user and copy the kubernetes ca cert file to their home direcotry and run the below command.
  In '--user' we have to use the same name which we are using in service-account. 
 
 
+```
 $ kubectl config set-cluster kubernetes --server=KUBE-URL --certificate-authority=/home/test/ca.crt
 $ kubectl config set-credentials service-account-name --token='use the token which is generated and decoded'
 $ kubectl config set-context service-account-name --cluster=kubernetes --user=service-account-name --namespace=test-namespace
 $ kubectl config use-context service-account-name
 $ kubectl get po
 
+```
