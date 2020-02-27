@@ -8,6 +8,7 @@ We can authenticate users using kubectl in kubernetes with below two way!!!!
 ####################################################################################
 
 >> Creating a test-namespace.
+
 $ kubectl create ns test-namespace
 
 >> Creating role and rolebinding for accessing kubernetes cluster.........
