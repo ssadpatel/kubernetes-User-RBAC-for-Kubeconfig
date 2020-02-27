@@ -7,7 +7,7 @@ We can authenticate users using kubectl in kubernetes with below two way!!!!
 
 ####################################################################################
 
-1. User base authentication with kubernetes CA certificate.
+# 1. User base authentication with kubernetes CA certificate.
 
 Creating a test-namespace.
 
@@ -16,13 +16,13 @@ $ kubectl create ns test-namespace
 Creating role and rolebinding for accessing kubernetes cluster.........
 Replace namespace and username with your in role-and-binding-base-user-access.yaml file !!!!
 
-$ kubectl apply -f user-base-authentication-with-ca-certificate/role-and-binding-base-user-access.yaml
+`$ kubectl apply -f user-base-authentication-with-ca-certificate/role-and-binding-base-user-access.yaml`
 
 Now creating user certificate to authenticate kubernetes cluster. Creating certificate for user: test  
 
-$ openssl genrsa -out test.key 2048
-$ openssl req -new -key test.key -out test.csr -subj /CN=test
-$ openssl x509 -req -in test.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out test.crt -days 500 -sha256
+`$ openssl genrsa -out test.key 2048`
+`$ openssl req -new -key test.key -out test.csr -subj /CN=test`
+`$ openssl x509 -req -in test.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out test.crt -days 500 -sha256`
 
 Set the context for user test. Add a new user and copy the certs file to their home direcotry and run the below command. 
 
